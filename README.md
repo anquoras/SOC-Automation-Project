@@ -55,4 +55,4 @@ https://github.com/gentilkiwi/mimikatz/releases/tag/2.2.0-20220919
 
 ## Author
 
-Vũ Đức Quân — MSc Cyber Security, University of Southampton.
+Quoc Anh Luu — MSc Cyber Security, University of Southampton.
