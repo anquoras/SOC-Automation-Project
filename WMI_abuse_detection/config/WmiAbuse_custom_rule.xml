@@ -1,0 +1,21 @@
+<group name="wmi_abuse,">
+
+  <!-- wmic.exe used to create a process or execute on a remote node -->
+  <rule id="100007" level="12">
+    <if_sid>92068</if_sid>
+    <field name="win.eventdata.originalFileName" type="pcre2">(?i)wmic\.exe</field>
+    <field name="win.eventdata.commandLine" type="pcre2">(?i)process\s+call\s+create|/node:</field>
+    <description>WMI Abuse: wmic.exe usage in host $(win.system.computer) by $(win.eventdata.user): $(win.eventdata.commandLine)</description>
+    <mitre><id>T1047</id></mitre>
+  </rule>
+
+  <!-- WmiPrvSE.exe spawning a command interpreter (remote WMI execution) -->
+  <rule id="100008" level="12">
+    <if_sid>92069, 92070</if_sid>
+    <field name="win.eventdata.parentImage" type="pcre2">(?i)wmiprvse\.exe$</field>
+    <field name="win.eventdata.image" type="pcre2">(?i)(cmd|powershell|pwsh|wscript|cscript|mshta|rundll32)\.exe$</field>
+    <description>WMI abuse: WmiPrvSE.exe spawned $(win.eventdata.image) in host $(win.system.computer) - possible WMI execution</description>
+    <mitre><id>T1047</id></mitre>
+  </rule>
+
+</group>
